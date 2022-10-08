@@ -34,9 +34,7 @@ function setup(){
     //On cache le canva par défaut
     createCanvas(0, 0);
     //Initialisation du menu principal
-    initMainMenu();
-
-    //Evenement de clic sur le canva
+    initGame();
 }
   
 /** Dessin du canva */
@@ -73,6 +71,9 @@ function displayEndGameModal(message){
 
 /** Lance le jeu */
 async function initGame(){
+    //Affichage du panel
+    document.getElementById('game_container').classList.remove('hidden');
+
     //Création de la partie
     game = new Game(
         new Grid(game_dimension.width, game_dimension.height, 5, 8, grid_colors)
@@ -104,6 +105,20 @@ async function initGame(){
 
     //Changement d'étape
     current_step = STEPS.IN_GAME;
+
+    //Barre d'action
+    initGameActionsBar();
+}
+
+/** Initialise l'affichage de la barre d'action */
+function initGameActionsBar(){
+    //Sélection de la barre d'actions
+    let dom_actions_bar = document.querySelector('#game_container #game_actions_row');
+    
+    //Bouton Recommencer
+    dom_actions_bar.querySelector('button[data-action="restart"]').addEventListener('click', () => {
+        initGame();
+    });
 }
 
 /** Au clic sur le canva de jeu */

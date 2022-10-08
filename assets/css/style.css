@@ -27,6 +27,10 @@
 
 /** STYLES **/
 /** Général **/
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -51,6 +55,7 @@ main {
   justify-content: center;
   align-items: center;
   flex: 1;
+  padding: 0px 20px;
   /** Conteneur du menu **/
   /** Conteneur du jeu **/
 }
@@ -92,13 +97,30 @@ main > div#menu_container > .menu#main_menu h1 {
 }
 main > div#game_container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
+  /** Barre d'actions **/
   /** Ligne principale **/
   /** Modale de victoire **/
 }
 main > div#game_container.hidden {
   display: none;
+}
+main > div#game_container #game_actions_row {
+  width: 100%;
+  background-color: #D2D7DF;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+main > div#game_container #game_actions_row button {
+  border: inherit;
+  padding: 10px;
+  background-color: #F5F6F8;
+  font-family: montserrat;
+  cursor: pointer;
+  border-radius: 5px;
 }
 main > div#game_container #game_main_row {
   display: flex;
@@ -130,7 +152,8 @@ main > div#game_container #game_main_row #players_container .player_informations
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 200px;
+  max-width: 200px;
+  width: 100%;
 }
 main > div#game_container #game_main_row #players_container .player_informations_panel.is_turn {
   outline: 2px solid #353535;
@@ -148,6 +171,15 @@ main > div#game_container #game_main_row #players_container .player_informations
   border-radius: 50%;
   border: 1px solid #353535;
   flex-shrink: 0;
+}
+@media screen and (max-width: 1052px) {
+  main > div#game_container #game_main_row {
+    flex-direction: column;
+  }
+  main > div#game_container #game_main_row #players_container {
+    height: inherit !important;
+    flex-direction: row;
+  }
 }
 main > div#game_container #victory_modal_container {
   width: 100%;

@@ -38,7 +38,15 @@
             </div>
             
             <!-- Conteneur du jeu -->
-            <div id="game_container">
+            <div id="game_container" class="hidden">
+                <!-- Barre d'actions -->
+                <div id="game_actions_row">
+                    <button data-action="restart">
+                        Recommencer
+                    </button>
+                </div>
+
+                <!-- Ligne de jeu -->
                 <div id="game_main_row">
                     <!-- Conteneur du canvas de jeu -->
                     <div id="grid_container">
