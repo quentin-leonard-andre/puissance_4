@@ -1,0 +1,192 @@
+@charset "UTF-8";
+/** IMPORTS **/
+/** Polices **/
+@font-face {
+  font-family: montserrat;
+  src: url("../fonts/montserrat.ttf");
+}
+/** Couleurs **/
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8A897C;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #BDBBB0;
+}
+
+/** STYLES **/
+/** Général **/
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: montserrat;
+}
+
+h1 {
+  margin: 0;
+}
+
+/** Barre de navigation **/
+header {
+  background-color: #D2D7DF;
+  padding: 20px;
+}
+
+/** Contenu principal de la page **/
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /** Conteneur du menu **/
+  /** Conteneur du jeu **/
+}
+main > div#menu_container > .menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+main > div#menu_container > .menu.hidden {
+  display: none;
+}
+main > div#menu_container > .menu button {
+  padding: 10px;
+  background-color: #D2D7DF;
+  border: inherit;
+  border-radius: 5px;
+  font-family: montserrat;
+  cursor: pointer;
+  font-size: inherit;
+  width: 100%;
+  transition: background-color 0.1s linear;
+}
+main > div#menu_container > .menu button:hover:not(.disabled) {
+  background-color: #F5F6F8;
+}
+main > div#menu_container > .menu button.disabled {
+  cursor: auto;
+  color: #D2D7DF;
+  background-color: #F5F6F8;
+}
+main > div#menu_container > .menu button.back_button {
+  margin-top: 40px;
+  background-color: #F5F6F8;
+}
+main > div#menu_container > .menu#main_menu h1 {
+  margin-bottom: 20px;
+}
+main > div#game_container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /** Ligne principale **/
+  /** Modale de victoire **/
+}
+main > div#game_container.hidden {
+  display: none;
+}
+main > div#game_container #game_main_row {
+  display: flex;
+  gap: 10px;
+  /** Conteneur de la grille de jeu **/
+  /** Conteneur de l'ensemble des joueurs **/
+}
+main > div#game_container #game_main_row #grid_container {
+  margin-bottom: -4px;
+  overflow: hidden;
+}
+main > div#game_container #game_main_row #grid_container > canvas {
+  border-radius: 5px;
+  width: 100% !important;
+  height: inherit !important;
+}
+main > div#game_container #game_main_row #players_container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F6F8;
+  border-radius: 5px;
+  overflow: auto;
+  padding: 2px;
+  box-sizing: border-box;
+}
+main > div#game_container #game_main_row #players_container .player_informations_panel {
+  padding: 10px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
+}
+main > div#game_container #game_main_row #players_container .player_informations_panel.is_turn {
+  outline: 2px solid #353535;
+  z-index: 1;
+  background-color: #D2D7DF;
+}
+main > div#game_container #game_main_row #players_container .player_informations_panel label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+main > div#game_container #game_main_row #players_container .player_informations_panel .color_displayer {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #353535;
+  flex-shrink: 0;
+}
+main > div#game_container #victory_modal_container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+main > div#game_container #victory_modal_container.hidden {
+  display: none;
+}
+main > div#game_container #victory_modal_container #victory_modal {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #D2D7DF;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+main > div#game_container #victory_modal_container #victory_modal .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+main > div#game_container #victory_modal_container #victory_modal .buttons button {
+  background-color: #D2D7DF;
+  font-family: montserrat;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: inherit;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */

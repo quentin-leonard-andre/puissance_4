@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Puissance 4</title>
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- Librairies -->
+        <script src="assets/libraries/p5/p5.min.js"></script>
+    </head>
+
+    <body>
+
+        <header>
+            Puissance 4
+        </header>
+
+        <main>
+            <!-- Conteneur du menu -->
+            <div id="menu_container">
+                <!-- Menu principal -->
+                <div id="main_menu" class="menu hidden">
+                    <h1>Puissance 4</h1>
+                    <button data-action="new_game">Nouvelle partie</button>
+                </div>
+
+                <!-- Choix du mode de jeu -->
+                <div id="mode_choice_menu" class="menu hidden">
+                    <h2>Mode de jeu</h2>
+                    <button data-action="player_versus_player">Joueur contre joueur</button>
+                    <button data-action="player_versus_player" class="disabled">Joueur contre ordinateur</button>
+                    <button data-action="back" class="back_button">Retour</button>
+                </div>
+            </div>
+            
+            <!-- Conteneur du jeu -->
+            <div id="game_container">
+                <div id="game_main_row">
+                    <!-- Conteneur du canvas de jeu -->
+                    <div id="grid_container">
+
+                    </div>
+                    <!-- Liste des joueurs -->
+                    <div id="players_container">
+
+                    </div>
+                </div>
+
+                <!-- Modale de victoire -->
+                <div id="victory_modal_container" class="hidden">
+                    <div id="victory_modal">
+                        <!-- Message -->
+                        <p class="message">
+                        </p>
+
+                        <!-- Barre de boutons -->
+                        <div class="buttons">
+                            <button data-action="close_modal">Voir le plateau</button>
+                            <button data-action="restart">Recommencer</button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </main>
+
+        <footer></footer>
+
+        <!-- Import des classes -->
+        <script src="assets/scripts/classes/game.class.js"></script>
+        <script src="assets/scripts/classes/player.class.js"></script>
+        <script src="assets/scripts/classes/grid.class.js"></script>
+
+        <!-- Import des scripts -->
+        <script src="assets/scripts/index.js"></script>
+    </body>
+</html>
