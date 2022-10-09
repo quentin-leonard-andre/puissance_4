@@ -22,10 +22,76 @@ h1{
     margin: 0;
 }
 
+button{
+    font-family: montserrat;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 /** Barre de navigation **/ 
 header{
     background-color: $light_blue_color;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    & > div:first-child{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        svg{
+            display: none;
+            width: 24px;
+            fill: $black_color;
+        }
+    }
+
+    ul{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        button{
+            background-color: inherit;
+            border: inherit;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: $lighter_blue_color;
+        }
+    }
+
+    /** Mobile **/
+    @media screen and (max-width: 425px){
+        flex-direction: column;
+        gap: 0px;
+        align-items: start;
+
+        & > div:first-child{
+            width: 100%;
+            svg{
+                display: flex;
+            }
+        }
+
+        nav{
+            max-height: 0;
+            transition: all 0.1s ease-in-out;
+            overflow: hidden;
+
+            &.mobile_open{
+                margin-top: 20px;
+                max-height: fit-content;
+            }
+        }
+    }
+    
 }
 
 /** Contenu principal de la page **/
@@ -112,6 +178,7 @@ main{
                 font-family: montserrat;
                 cursor: pointer;
                 border-radius: 5px;
+                font-size: inherit;
             }
         }
 
@@ -184,6 +251,11 @@ main{
             }
         }
 
+        /** Mobile **/
+        @media screen and (max-width: 425px){
+            font-size: 10px;
+        }
+
         /** Modale de victoire **/
         #victory_modal_container{
             width: 100%;
@@ -225,6 +297,7 @@ main{
                         padding: 5px 10px;
                         border: inherit;
                         cursor: pointer;
+                        font-size: inherit;
                     }
                 }
             }

@@ -33,6 +33,9 @@ let game;
 function setup(){   
     //On cache le canva par défaut
     createCanvas(0, 0);
+    //Initialisation de la barre de navigation
+    initHeader();
+
     //Initialisation du menu principal
     initGame();
 }
@@ -202,4 +205,34 @@ function initModeChoiceMenu(){
     });
 }
 
-/** Affichage du menu de personnalisation des joueurs */
+/** Initialisation de l'entête */
+function initHeader(){
+    //Récupération de l'élément du DOM
+    let header_dom = document.querySelector('header');
+
+    //Menu mobile
+    header_dom.querySelector('#toggle_mobile_menu_button').addEventListener('click', () => {
+        header_dom.querySelector('nav').classList.toggle('mobile_open');
+    });
+
+    //Bouton de redirection vers le menu
+    header_dom.querySelector('button[data-action="main_menu"]').addEventListener('click', () => {
+        hideAllMain();
+        initMainMenu();
+    });
+}
+
+/** Dissimule tous les encarts enfants du sélecteur de dom parent fourni en paramètre */
+function hideAllChildren(dom_selector){
+    let parent_dom = document.querySelector(dom_selector);
+
+    [...parent_dom.children].forEach(child => {
+        child.classList.add('hidden');
+    })
+}
+
+/** Dissimule tous les encarts présents dans la zone principale */
+function hideAllMain(){
+    hideAllChildren('main');
+    hideAllChildren('main #menu_container');
+}

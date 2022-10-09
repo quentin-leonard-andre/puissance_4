@@ -43,10 +43,69 @@ h1 {
   margin: 0;
 }
 
+button {
+  font-family: montserrat;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 /** Barre de navigation **/
 header {
   background-color: #D2D7DF;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /** Mobile **/
+}
+header > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header > div:first-child svg {
+  display: none;
+  width: 24px;
+  fill: #353535;
+}
+header ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+header ul button {
+  background-color: inherit;
+  border: inherit;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #F5F6F8;
+}
+@media screen and (max-width: 425px) {
+  header {
+    flex-direction: column;
+    gap: 0px;
+    align-items: start;
+  }
+  header > div:first-child {
+    width: 100%;
+  }
+  header > div:first-child svg {
+    display: flex;
+  }
+  header nav {
+    max-height: 0;
+    transition: all 0.1s ease-in-out;
+    overflow: hidden;
+  }
+  header nav.mobile_open {
+    margin-top: 20px;
+    max-height: fit-content;
+  }
 }
 
 /** Contenu principal de la page **/
@@ -101,6 +160,7 @@ main > div#game_container {
   gap: 10px;
   /** Barre d'actions **/
   /** Ligne principale **/
+  /** Mobile **/
   /** Modale de victoire **/
 }
 main > div#game_container.hidden {
@@ -121,6 +181,7 @@ main > div#game_container #game_actions_row button {
   font-family: montserrat;
   cursor: pointer;
   border-radius: 5px;
+  font-size: inherit;
 }
 main > div#game_container #game_main_row {
   display: flex;
@@ -181,6 +242,11 @@ main > div#game_container #game_main_row #players_container .player_informations
     flex-direction: row;
   }
 }
+@media screen and (max-width: 425px) {
+  main > div#game_container {
+    font-size: 10px;
+  }
+}
 main > div#game_container #victory_modal_container {
   width: 100%;
   height: 100vh;
@@ -219,6 +285,7 @@ main > div#game_container #victory_modal_container #victory_modal .buttons butto
   padding: 5px 10px;
   border: inherit;
   cursor: pointer;
+  font-size: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */
