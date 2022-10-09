@@ -37,7 +37,7 @@ function setup(){
     initHeader();
 
     //Initialisation du menu principal
-    initGame();
+    initMainMenu();
 }
   
 /** Dessin du canva */
