@@ -100,7 +100,7 @@ main{
     justify-content: center;
     align-items: center;
     flex: 1;
-    padding: 0px 20px;
+    padding: 20px;
 
     /** Conteneur du menu **/
     & > div#menu_container{
@@ -195,6 +195,7 @@ main{
                     border-radius: 5px;
                     width: 100%!important;
                     height: inherit!important;
+                    cursor: pointer;
                 }
             }
 
@@ -207,6 +208,7 @@ main{
                 overflow: auto;
                 padding: 2px;
                 box-sizing: border-box;
+                flex-shrink: 0;
 
                 .player_informations_panel{
                     padding: 10px;
