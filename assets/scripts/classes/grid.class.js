@@ -243,4 +243,18 @@ class Grid{
 
         return winner_id;
     }
+
+    /** Retourne un tableau d'entiers correspondant aux ids de colonnes restant au moins un espace disponible */
+    getAvailablesColumnsIds(){
+        let res = [];
+        for(let column_index = 0; column_index < this.columns_number; column_index++){
+            for(let row_index = 0; row_index < this.rows_number; row_index++){
+                if(this.content[row_index][column_index] == '.'){
+                    res.push(column_index);
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 }

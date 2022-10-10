@@ -7,15 +7,25 @@ const STEPS = {
     END: 2
 }
 
+//Modes de jeu
+const GAME_MODES = {
+    NONE: -1,
+    PLAYER_VS_PLAYER: 0,
+    PLAYER_VS_COMPUTER: 1
+};
+
 //Etape en cours
 let current_step = STEPS.MAIN_MENU;
+
+//Mode de jeu
+let current_game_mode = GAME_MODES.NONE;
 
 //Canva
 let canva;
 
 //Dimensions de la zone de jeu
 let game_dimension = {
-    width: 800,
+    width: 600,
     height: 500
 }
 
@@ -79,11 +89,11 @@ async function initGame(){
 
     //Création de la partie
     game = new Game(
-        new Grid(game_dimension.width, game_dimension.height, 5, 8, grid_colors)
+        new Grid(game_dimension.width, game_dimension.height, 6, 7, grid_colors)
     );
 
     //Création du canva
-    canva = createCanvas(800, 500);
+    canva = createCanvas(game_dimension.width, game_dimension.height);
     canva.id('game');
     //Positionnement du canvas
     canva.parent('grid_container');
@@ -92,9 +102,23 @@ async function initGame(){
     canva.canvas.removeEventListener('click', onGameCanvaClick);
     canva.canvas.addEventListener('click', onGameCanvaClick);
 
-    //Ajout des joueurs
-    game.addPlayer(new Player(0, "Joueur 1", "yellow"));
-    game.addPlayer(new Player(1, "Joueur 2", "red"));
+    //Selon le mode de jeu
+    switch(current_game_mode){
+        //Joueur contre joueur
+        case GAME_MODES.PLAYER_VS_PLAYER:
+            //Ajout des joueurs
+            game.addPlayer(new Player(0, "Joueur 1", "yellow"));
+            game.addPlayer(new Player(1, "Joueur 2", "red"));
+        break;
+        
+        //Joueur contre ordinateur
+        case GAME_MODES.PLAYER_VS_COMPUTER:
+            //Ajout des joueurs
+            game.addPlayer(new Player(0, "Joueur 1", "yellow"));
+            game.addPlayer(new Player(1, "Ordinateur", "orange", true));
+        break;
+    }
+    
     //Sélection du premier joueur
     game.player_turn = game.players[0];
 
@@ -126,8 +150,8 @@ function initGameActionsBar(){
 
 /** Au clic sur le canva de jeu */
 function onGameCanvaClick(){
-    //Si la partie existe et que la partie n'est pas terminée
-    if(game && current_step!=STEPS.END){
+    //Si la partie existe et que la partie n'est pas terminée et que le joueur dont c'est le tour n'est pas un ordinateur
+    if(game && current_step!=STEPS.END && (!game.player_turn.is_computer)){
         //Récupération de la colonne sélectionnée
         let hover_column = game.grid.getHoverColumn();
         //Si une colonne est sélectionnée
@@ -192,6 +216,18 @@ function initModeChoiceMenu(){
     mode_choice_menu_dom.querySelector('button[data-action="player_versus_player"]').addEventListener('click', () => {
         //On cache le menu de sélection du mode
         mode_choice_menu_dom.classList.add('hidden');
+        //Changement du mode de jeu
+        current_game_mode = GAME_MODES.PLAYER_VS_PLAYER;
+        //Lancement du jeu
+        initGame();
+    });
+
+    //Sélection du bouton joueur contre ordinateur
+    mode_choice_menu_dom.querySelector('button[data-action="player_versus_computer"]').addEventListener('click', () => {
+        //On cache le menu de sélection du mode
+        mode_choice_menu_dom.classList.add('hidden');
+        //Changement du mode de jeu
+        current_game_mode = GAME_MODES.PLAYER_VS_COMPUTER;
         //Lancement du jeu
         initGame();
     });

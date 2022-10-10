@@ -21,14 +21,30 @@ class Game{
     }
 
     /** Passe au tour suivant */
-    nextTurn(){
+    async nextTurn(){
+        //Sélection du prochain joueur
+        await this.nextPlayer();
+
+        //Si le joueur suivant est un robot
+        if(this.player_turn.is_computer){
+            //Temps de latence pour être user friendly
+            setTimeout(() => {
+                //On le fait jouer
+                this.player_turn.randomPlay(this.grid);
+                this.nextPlayer();
+            }, 500);
+        }
+    }
+
+    /** Passe au joueur suivant */
+    async nextPlayer(){
         //Récupération de l'id du tableau des joueurs correspondant au joueur dont c'est le joueur
         let player_turn_array_index = this.players.findIndex(player => player.id == this.player_turn.id);
         //Suppression de la classe dans l'affichage graphique
         document.getElementsByClassName('is_turn').forEach(dom_element => {
             dom_element.classList.remove('is_turn');
-        })
-        
+        });
+
         //Si on arrive à la fin du tableau de joueurs
         if(player_turn_array_index >= this.players.length-1){
             this.player_turn = this.players[0];
