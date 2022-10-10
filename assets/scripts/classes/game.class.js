@@ -22,17 +22,35 @@ class Game{
 
     /** Passe au tour suivant */
     async nextTurn(){
-        //Sélection du prochain joueur
-        await this.nextPlayer();
+        //On checke si il existe un gagnant
+        let winner_id = game.grid.getWinnerId();
 
-        //Si le joueur suivant est un robot
-        if(this.player_turn.is_computer){
-            //Temps de latence pour être user friendly
-            setTimeout(() => {
+        //Si pas de gagnant
+        if(winner_id == -1){
+            //Sélection du prochain joueur
+            await this.nextPlayer();
+
+            //Si le joueur suivant est un robot
+            if(this.player_turn.is_computer){
                 //On le fait jouer
-                this.player_turn.randomPlay(this.grid);
-                this.nextPlayer();
-            }, 500);
+                this.grid.addPawn(this.player_turn.makeChoice(this, this.player_turn), this.player_turn.id);
+                this.nextTurn();
+            }
+        }
+        //Si match nul
+        else if(winner_id == -2){
+            current_step = STEPS.END;
+            //Affichage de la modale d'égalité
+            displayEndGameModal("Match nul.");
+        }
+        //Si un gagnant
+        else{
+            //Récupération gagnant
+            let winner = game.players.find(player => player.id == winner_id);
+            current_step = STEPS.END;
+
+            //Affichage de la modale de victoire
+            displayEndGameModal(winner.name + " a gagné.");
         }
     }
 

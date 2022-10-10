@@ -32,7 +32,58 @@ class Player{
             grid.addPawn(
                 availables_columns[Math.floor(Math.random()*availables_columns.length)],
                 this.id
-            )
+            );
         }
+    }
+
+    /** Evalue l'état du jeu pour un joueur donné */
+    getHeuristic(game, player = this){
+        let res = 0
+        let winner_id = game.grid.getWinnerId();
+
+        if(winner_id == player.id){
+            res = 1;
+        }
+        else if(winner_id != -1){
+            res = -1;
+        }
+        
+        return res;
+    }
+
+    /** Effectue une prédiction selon un jeu, une colonne et un joueur, renvoie l'heuristique associée au mouvement courant */
+    predict(game, col, player){
+        //Copie de l'objet de jeu
+        let tmp_game = _.cloneDeep(game);
+
+        tmp_game.grid.addPawn(col, player.id);
+
+        //Renvoie l'heuristique
+        return this.getHeuristic(tmp_game, player);
+    }
+
+    /** Détermine un choix */
+    makeChoice(game, player){
+        let column_to_play = null;
+        let heuristics = [];
+        
+        //Parcours de toutes les colonnes disponibles
+        game.grid.getAvailablesColumnsIds().forEach(col_index => {
+            //Prédiction de défense
+            [...game.players.filter(player => player.id != game.player_turn.id)].forEach(ennemy => {
+                heuristics.push({
+                    value: this.predict(game, col_index, ennemy),
+                    col_index: col_index
+                });
+            });
+
+            //Prédiction d'attaque
+            heuristics.push({
+                value: this.predict(game, col_index, player),
+                col_index: col_index
+            });
+        });
+
+        return heuristics.sort((a,b) => b.value - a.value)[0].col_index;
     }
 }

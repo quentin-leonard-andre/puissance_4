@@ -18,7 +18,7 @@ const GAME_MODES = {
 let current_step = STEPS.MAIN_MENU;
 
 //Mode de jeu
-let current_game_mode = GAME_MODES.NONE;
+let current_game_mode = GAME_MODES.PLAYER_VS_COMPUTER;
 
 //Canva
 let canva;
@@ -45,9 +45,8 @@ function setup(){
     createCanvas(0, 0);
     //Initialisation de la barre de navigation
     initHeader();
-
     //Initialisation du menu principal
-    initMainMenu();
+    initGame();
 }
   
 /** Dessin du canva */
@@ -157,32 +156,7 @@ function onGameCanvaClick(){
         //Si une colonne est sélectionnée
         if(hover_column != -1){
             let new_pawn_row_index = game.grid.addPawn(hover_column, game.player_turn.id);
-            //Ajout du jeton du joueur dont c'est le tour
-            if(new_pawn_row_index != -1){
-                //On checke si il existe un gagnant
-                let winner_id = game.grid.getWinnerId();
-
-                //Si pas de gagnant
-                if(winner_id == -1){
-                    //Gestion du tour suivant
-                    game.nextTurn();
-                }
-                //Si match nul
-                else if(winner_id == -2){
-                    current_step = STEPS.END;
-                    //Affichage de la modale d'égalité
-                    displayEndGameModal("Match nul.");
-                }
-                //Si un gagnant
-                else{
-                    //Récupération gagnant
-                    let winner = game.players.find(player => player.id == winner_id);
-                    current_step = STEPS.END;
-
-                    //Affichage de la modale de victoire
-                    displayEndGameModal(winner.name + " a gagné.");
-                }
-            }
+            game.nextTurn();
         }
     }
 }
