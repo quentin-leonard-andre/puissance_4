@@ -46,7 +46,7 @@ function setup(){
     //Initialisation de la barre de navigation
     initHeader();
     //Initialisation du menu principal
-    initGame();
+    initMainMenu();
 }
   
 /** Dessin du canva */
