@@ -84,6 +84,14 @@ class Player{
             });
         });
 
-        return heuristics.sort((a,b) => b.value - a.value)[0].col_index;
+        let best_heuristic = heuristics.sort((a,b) => b.value - a.value)[0];
+        let best_heuristics = heuristics.filter(heuristic => heuristic.value == best_heuristic.value);
+        //On retourne un des meilleurs heuristiques pour rendre l'IA plus imprévisible
+        return this.getRandomArrayElement(best_heuristics).col_index;
+    }
+
+    /** Retourne un élément aléatoire d'un tableau */
+    getRandomArrayElement(array){
+        return array[Math.floor(Math.random()*array.length)];
     }
 }
